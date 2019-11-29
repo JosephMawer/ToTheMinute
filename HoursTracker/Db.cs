@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using HoursTracker.ViewModels;
 using Microsoft.Data.Sqlite;
 
 namespace HoursTracker
@@ -70,6 +71,11 @@ namespace HoursTracker
                     await cmd.ExecuteReaderAsync();
                 }
             }
+        }
+
+        public static async Task<IEnumerable<TimeSheet>> GetTimeSheets()
+        {
+            return default;
         }
     }
 }

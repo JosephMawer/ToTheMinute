@@ -30,6 +30,9 @@ namespace HoursTracker
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            // Initialize database at app startup
+            Db.InitializeDatabase().ConfigureAwait(false);
         }
 
         /// <summary>
