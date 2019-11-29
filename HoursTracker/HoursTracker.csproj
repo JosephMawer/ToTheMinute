@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToButtonTextConverter.cs" />
     <Compile Include="Converters\StatusToColorConverter.cs" />
     <Compile Include="Converters\BoolToStatusConverter.cs" />
     <Compile Include="Db.cs" />

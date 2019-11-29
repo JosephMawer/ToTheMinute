@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,9 +23,21 @@ namespace HoursTracker
             this.InitializeComponent();
             TimeSheets = new List<TimeSheet>();
             
-            TimeSheets.Add(new TimeSheet {Category = "Work", ClockedIn = true});
-            TimeSheets.Add(new TimeSheet { Category = "Music", ClockedIn = false });
-            TimeSheets.Add(new TimeSheet { Category = "Other", ClockedIn = false });
+            var weekArray = new ObservableCollection<Week>
+            {
+                new Week() {Day = "Mon", TotalHours =7.5f},
+                new Week() {Day = "Tue", TotalHours =7.5f},
+                new Week() {Day = "Wed", TotalHours =7.5f},
+                new Week() {Day = "Thu", TotalHours =7.5f},
+                new Week() {Day = "Fri", TotalHours =7.5f},
+                new Week() {Day = "Sat", TotalHours =0f},
+                new Week() {Day = "Sun", TotalHours =0f}
+
+            };
+
+            TimeSheets.Add(new TimeSheet {Category = "Work", ClockedIn = true, Week = weekArray });
+            TimeSheets.Add(new TimeSheet { Category = "Music", ClockedIn = false, Week = weekArray });
+            TimeSheets.Add(new TimeSheet { Category = "Other", ClockedIn = false, Week = weekArray });
 
             
             _localSettings = ApplicationData.Current.LocalSettings;

@@ -13,7 +13,7 @@ namespace HoursTracker.ViewModels
 
         public string Category { get; set; }
 
-        //public ObservableCollection<Week> Week { get; set; }
+        public ObservableCollection<Week> Week { get; set; }
 
         //public float TotalHoursForWeek { get; set; }
     }
