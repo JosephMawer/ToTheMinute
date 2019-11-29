@@ -9,31 +9,13 @@ namespace HoursTracker.ViewModels
 {
     public class TimeSheet
     {
-        private bool _clockedIn;
-        public bool ClockedIn
-        {
-            get => _clockedIn;
-            set
-            {
-                _clockedIn = value;
-                //OnProperyChangedEvent();
-            }
-        }
+        public bool ClockedIn { get; set; }
 
-        private string _category;
-        public string Category
-        {
-            get => _category;
-            set
-            {
-                _category = value;
-                //OnPropertyChanged();
-            }
-        }
+        public string Category { get; set; }
 
-        public ObservableCollection<Week> Week { get; set; }
+        //public ObservableCollection<Week> Week { get; set; }
 
-        public float TotalHoursForWeek { get; set; }
+        //public float TotalHoursForWeek { get; set; }
     }
 
     public struct Week

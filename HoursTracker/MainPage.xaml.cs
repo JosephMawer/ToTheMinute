@@ -21,12 +21,12 @@ namespace HoursTracker
         {
             this.InitializeComponent();
             TimeSheets = new List<TimeSheet>();
-            {
-                new TimeSheet() {Category = "Work", ClockedIn = true};
-                new TimeSheet() { Category = "Music", ClockedIn = false };
-                new TimeSheet() { Category = "Other", ClockedIn = false };
+            
+            TimeSheets.Add(new TimeSheet {Category = "Work", ClockedIn = true});
+            TimeSheets.Add(new TimeSheet { Category = "Music", ClockedIn = false });
+            TimeSheets.Add(new TimeSheet { Category = "Other", ClockedIn = false });
 
-            }
+            
             _localSettings = ApplicationData.Current.LocalSettings;
             _clockedIn = _localSettings.Values["ClockedIn"] as bool? ?? false;
             // updates text on button

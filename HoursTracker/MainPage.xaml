@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HoursTracker"
     xmlns:viewModel="using:HoursTracker.ViewModels"
+    xmlns:converters="using:HoursTracker.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -12,7 +13,11 @@
     
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-  
+    <Page.Resources>
+        <converters:BoolToStatusConverter x:Key="StatusConverter"/>
+        <converters:StatusToColorConverter x:Key="ColorConverter"/>
+     
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -27,7 +32,7 @@
         </StackPanel>
 
 
-        <ListBox Grid.Row="0" ItemsSource="{x:Bind TimeSheets}">
+        <ListBox Grid.Row="1" ItemsSource="{x:Bind TimeSheets}">
             <ListBox.ItemTemplate>
                 <DataTemplate x:DataType="viewModel:TimeSheet">
                     <Grid>
@@ -37,13 +42,13 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel>
 
-                            <TextBlock Text="Category: Work" Margin="0 5 5 5">
+                            <TextBlock Margin="0 5 5 5">
                                 <Run Text="Category: "/>
-                                <Run Text="{x:Bind Category}" FontWeight="Bold" Foreground="LimeGreen"/>
+                                <Run Text="{x:Bind Category}" FontWeight="Bold"/>
                             </TextBlock>
                             <TextBlock>
                                 <Run Text="Status: "/>
-                                <Run Text="{x:Bind ClockedIn}" FontWeight="Bold" Foreground="LimeGreen"/>
+                                <Run Text="{x:Bind ClockedIn, Converter={StaticResource StatusConverter}}" FontWeight="Bold" Foreground="{x:Bind ClockedIn, Converter={StaticResource ColorConverter}}"/>
                             </TextBlock>
                             <Button Content="Clock-In"
                                 Width="100" Height="35" Margin="0 5 5 5"
