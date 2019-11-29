@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage;
+﻿using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -30,6 +17,7 @@ namespace HoursTracker
         public MainPage()
         {
             this.InitializeComponent();
+
             _localSettings = ApplicationData.Current.LocalSettings;
             _clockedIn = _localSettings.Values["ClockedIn"] as bool? ?? false;
            
@@ -46,9 +34,12 @@ namespace HoursTracker
         // manages state, i.e. clocked-in or clocked-out
         private void UpdateSettings()
         {
+            // updates internal state
             _clockedIn = !_clockedIn;
-            ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
             _localSettings.Values["ClockedIn"] = _clockedIn;
+
+            // updates text on button
+            ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
         }
     }
 }
