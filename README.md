@@ -1,4 +1,4 @@
-# ToTheMinute
+# 2TheMinute
 Simple app used for tracking time
 
 

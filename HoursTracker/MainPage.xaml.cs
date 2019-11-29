@@ -1,6 +1,8 @@
-﻿using Windows.Storage;
+﻿using System.Collections.Generic;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using HoursTracker.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -13,17 +15,22 @@ namespace HoursTracker
     {
         private readonly ApplicationDataContainer _localSettings;
         private bool _clockedIn;
+        private List<TimeSheet> TimeSheets;
 
         public MainPage()
         {
             this.InitializeComponent();
+            TimeSheets = new List<TimeSheet>();
+            {
+                new TimeSheet() {Category = "Work", ClockedIn = true};
+                new TimeSheet() { Category = "Music", ClockedIn = false };
+                new TimeSheet() { Category = "Other", ClockedIn = false };
 
+            }
             _localSettings = ApplicationData.Current.LocalSettings;
             _clockedIn = _localSettings.Values["ClockedIn"] as bool? ?? false;
             // updates text on button
-            ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
-
-            Db.InitializeDatabase().ConfigureAwait(false);
+            //ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
         }
 
         private async void ClockInClicked(object sender, RoutedEventArgs e)
@@ -41,7 +48,7 @@ namespace HoursTracker
             _localSettings.Values["ClockedIn"] = _clockedIn;
 
             // updates text on button
-            ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
+            //ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
         }
     }
 }

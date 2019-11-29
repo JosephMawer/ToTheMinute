@@ -30,14 +30,33 @@ namespace HoursTracker.ViewModels
                 //OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<Week> Week { get; set; }
+
+        public float TotalHoursForWeek { get; set; }
+    }
+
+    public struct Week
+    {
+        public string Day { get; set; }
+        public float TotalHours { get; set; }
     }
 
     public class TimeSheetViewModel
     {
-        public ObservableCollection<TimeSheet> TimeSheets  {get;set;}
+        private ObservableCollection<TimeSheet> _timeSheets;
+        public ObservableCollection<TimeSheet> TimeSheets
+        {
+            get => _timeSheets;
+            set
+            {
+                _timeSheets = value;
+                //OnPropertyChanged();
+            }
+        }
         public TimeSheetViewModel()
         {
-            TimeSheets = Db.GetTimeSheets().Result as ObservableCollection<TimeSheet>;
+            //TimeSheets = Db.GetTimeSheets().Result as ObservableCollection<TimeSheet>;
 
         }
         
