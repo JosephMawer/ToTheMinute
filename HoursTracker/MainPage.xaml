@@ -6,6 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="500"
+    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -15,17 +18,107 @@
         </Grid.RowDefinitions>
 
 
-        <Grid>
-            
-        </Grid>
+        <StackPanel>
+            <TextBlock Text="Add New Category..." Margin="10"/>
+            <Button Content="Add New" Margin="10"/>
+        </StackPanel>
 
 
+        <ListBox Name="CategoriesListBox" Grid.Row="1">
+
+            <ListBoxItem>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="Category: Work" Margin="0 5 5 5"></TextBlock>
+                        <TextBlock Text="Status: Active"></TextBlock>
+                        <Button Name="ClockActionButton" Content="Clock-In"
+                                Width="100" Height="35" Margin="0 5 5 5"
+                                Click="ClockInClicked"></Button>
+                    </StackPanel>
+                    <Grid Grid.Column="1" Margin="0 5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <!-- represents days of week -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Mon" Grid.Row="0" Grid.Column="0" Margin="5,0"/>
+                        <TextBlock Text="7.5" Grid.Row="1" Grid.Column="0" Margin="5,0"/>
+                        <TextBlock Text="Tue" Grid.Row="0" Grid.Column="1" Margin="5,0"/>
+                        <TextBlock Text="7.5" Grid.Row="1" Grid.Column="1" Margin="5,0"/>
+                        <TextBlock Text="Wed" Grid.Row="0" Grid.Column="2" Margin="5,0"/>
+                        <TextBlock Text="8.5" Grid.Row="1" Grid.Column="2" Margin="5,0"/>
+                        <TextBlock Text="Thu" Grid.Row="0" Grid.Column="3" Margin="5,0"/>
+                        <TextBlock Text="7.5" Grid.Row="1" Grid.Column="3" Margin="5,0"/>
+                        <TextBlock Text="Fri" Grid.Row="0" Grid.Column="4" Margin="5,0"/>
+                        <TextBlock Text="8" Grid.Row="1" Grid.Column="4" Margin="5,0"/>
+                        <TextBlock Text="Sat" Grid.Row="0" Grid.Column="5" Margin="5,0"/>
+                        <TextBlock Text="0" Grid.Row="1" Grid.Column="5" Margin="5,0"/>
+                        <TextBlock Text="Sun" Grid.Row="0" Grid.Column="6" Margin="5,0"/>
+                        <TextBlock Text="0" Grid.Row="1" Grid.Column="6" Margin="5,0"/>
+                    </Grid>
+                </Grid>
+            </ListBoxItem>
+            <ListBoxItem>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="Category: Work" Margin="0 5 5 5"></TextBlock>
+                        <TextBlock Text="Status: Active"></TextBlock>
+                        <Button Name="ClockAction2Button" Content="Clock-In"
+                                Width="100" Height="35" Margin="0 5 5 5"
+                                Click="ClockInClicked"></Button>
+                    </StackPanel>
+                    <Grid Grid.Column="1" Margin="0 5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <!-- represents days of week -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Mon" Grid.Row="0" Grid.Column="0" Margin="5,0"/>
+                        <TextBlock Text="7.5" Grid.Row="1" Grid.Column="0" Margin="5,0"/>
+                        <TextBlock Text="Tue" Grid.Row="0" Grid.Column="1" Margin="5,0"/>
+                        <TextBlock Text="7.5" Grid.Row="1" Grid.Column="1" Margin="5,0"/>
+                        <TextBlock Text="Wed" Grid.Row="0" Grid.Column="2" Margin="5,0"/>
+                        <TextBlock Text="8.5" Grid.Row="1" Grid.Column="2" Margin="5,0"/>
+                        <TextBlock Text="Thu" Grid.Row="0" Grid.Column="3" Margin="5,0"/>
+                        <TextBlock Text="7.5" Grid.Row="1" Grid.Column="3" Margin="5,0"/>
+                        <TextBlock Text="Fri" Grid.Row="0" Grid.Column="4" Margin="5,0"/>
+                        <TextBlock Text="8" Grid.Row="1" Grid.Column="4" Margin="5,0"/>
+                        <TextBlock Text="Sat" Grid.Row="0" Grid.Column="5" Margin="5,0"/>
+                        <TextBlock Text="0" Grid.Row="1" Grid.Column="5" Margin="5,0"/>
+                        <TextBlock Text="Sun" Grid.Row="0" Grid.Column="6" Margin="5,0"/>
+                        <TextBlock Text="0" Grid.Row="1" Grid.Column="6" Margin="5,0"/>
+                    </Grid>
+                </Grid>
+            </ListBoxItem>
+        </ListBox>
 
 
-        <Button Name="ClockActionButton" Grid.Row="1"
-            Content="Clock-In"
-            Width="Auto"
-            Height="Auto"
-            Click="ClockInClicked"></Button>
+        
     </Grid>
 </Page>

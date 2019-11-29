@@ -20,7 +20,9 @@ namespace HoursTracker
 
             _localSettings = ApplicationData.Current.LocalSettings;
             _clockedIn = _localSettings.Values["ClockedIn"] as bool? ?? false;
-           
+            // updates text on button
+            ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
+
             Db.InitializeDatabase().ConfigureAwait(false);
         }
 
