@@ -17,27 +17,13 @@ namespace HoursTracker
         private readonly ApplicationDataContainer _localSettings;
         private bool _clockedIn;
         private List<TimeSheet> TimeSheets;
-
+        private TimeSheetViewModel _timesheetVM = new TimeSheetViewModel();
         public MainPage()
         {
             this.InitializeComponent();
-            TimeSheets = new List<TimeSheet>();
+            TimeSheets = _timesheetVM.GetTimeSheets().Result;
             
-            var weekArray = new ObservableCollection<Week>
-            {
-                new Week() {Day = "Mon", TotalHours =7.5f},
-                new Week() {Day = "Tue", TotalHours =7.5f},
-                new Week() {Day = "Wed", TotalHours =7.5f},
-                new Week() {Day = "Thu", TotalHours =7.5f},
-                new Week() {Day = "Fri", TotalHours =7.5f},
-                new Week() {Day = "Sat", TotalHours =0f},
-                new Week() {Day = "Sun", TotalHours =0f}
-
-            };
-
-            TimeSheets.Add(new TimeSheet {Category = "Work", ClockedIn = true, Week = weekArray });
-            TimeSheets.Add(new TimeSheet { Category = "Music", ClockedIn = false, Week = weekArray });
-            TimeSheets.Add(new TimeSheet { Category = "Other", ClockedIn = false, Week = weekArray });
+            
 
             
             _localSettings = ApplicationData.Current.LocalSettings;
