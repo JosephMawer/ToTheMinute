@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,12 @@ using System.Windows.Input;
 
 namespace HoursTracker.ViewModels
 {
-    public class TimeSheet
+    public class TimeSheet : NotificationBase, INotifyPropertyChanged
     {
         public bool ClockedIn { get; set; }
 
         public string Category { get; set; }
-
+         
         public List<Week> Week { get; set; }
 
         //public float TotalHoursForWeek { get; set; }
@@ -23,9 +24,24 @@ namespace HoursTracker.ViewModels
         {
             DummyCommand = new RelayCommand(() =>
             {
-                //TODO
-                System.Diagnostics.Debug.WriteLine("DummyCommand");
+                var action = ClockedIn ? TimeSheetService.ClockAction.ClockOut : TimeSheetService.ClockAction.ClockIn;
+                TimeSheetService.AddData(action, Category).ConfigureAwait(false);
+                OnClockEvent(Category);
             });
+        }
+
+        public event EventHandler ClockEvent;
+
+        private void OnClockEvent(string category)
+        {
+            ClockEvent?.Invoke(this, null);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(String property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 
@@ -37,32 +53,39 @@ namespace HoursTracker.ViewModels
 
     public class TimeSheetViewModel : NotificationBase
     {
+        public TimeSheet TimeSheet { get; set; }
+
         private ObservableCollection<TimeSheet> _timeSheets;
-        public ObservableCollection<TimeSheet> TimeSheets
+        public ObservableCollection<TimeSheet> TimeSheets// { get; set; }
         {
             get => _timeSheets;
             set
             {
                 _timeSheets = value;
                 SetProperty(ref _timeSheets, value);
+
+                RaisePropertyChanged(nameof(TimeSheets));
             }
         }
 
-        
-
         public TimeSheetViewModel()
         {
-            TimeSheets = Db.GetTimeSheets().Result;
-           
+            UpdateTimeSheet();
         }
 
-        // returns a list of time sheet objects
-        //public async Task<List<TimeSheet>> GetTimeSheets() => await Db.GetTimeSheets();
+        public void UpdateTimeSheet()
+        {
+            TimeSheets = TimeSheetService.GetTimeSheets().Result;
+            foreach (var timesheet in TimeSheets)
+            {
+                timesheet.ClockEvent += OnClockEventClicked;
+            }
+        }
 
-
-
-
-
+        public void OnClockEventClicked(object sender, EventArgs e)
+        {
+            UpdateTimeSheet();
+        }
     }
 
     /// <summary>

@@ -32,7 +32,7 @@ namespace HoursTracker
             this.Suspending += OnSuspending;
 
             // Initialize database at app startup
-            Db.InitializeDatabase().ConfigureAwait(false);
+            TimeSheetService.InitializeDatabase().ConfigureAwait(false);
         }
 
         /// <summary>

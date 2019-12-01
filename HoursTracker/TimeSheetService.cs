@@ -24,7 +24,7 @@ namespace HoursTracker
     }
 
     // C:\Users\joseph.mawer.IDEA\AppData\Local\Packages\c16400a1-8cf8-40b0-8ba7-fea371f99e4b_t0yaebqe3tq6a\LocalState
-    public class Db
+    public class TimeSheetService
     {
         private static SqliteConnection _connection;
 
@@ -59,6 +59,7 @@ namespace HoursTracker
                 }
             }
         }
+
         public enum ClockAction
         {
             ClockIn,
@@ -66,16 +67,16 @@ namespace HoursTracker
         }
 
         // todo: ensure category is sent when adding data
-        public static async Task AddData(ClockAction action)
+        public static async Task AddData(ClockAction action, string category)
         {
             using (var _command = new SqliteCommand())
             {
                 _command.Connection = _connection;
                 // Use parameterized query to prevent SQL injection attacks
-                _command.CommandText = $"insert into {Table} ('Action', 'TimeOfAction') values (@action, @time)";
+                _command.CommandText = $"insert into {Table} ('Action', 'TimeOfAction', 'Category') values (@action, @time, @category)";
                 _command.Parameters.AddWithValue("@action", action);
                 _command.Parameters.AddWithValue("@time", DateTimeSQLite(DateTime.Now));
-
+                _command.Parameters.AddWithValue("@category", category);
                 await _command.ExecuteReaderAsync();
             }
         }

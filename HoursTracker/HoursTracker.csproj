@@ -122,7 +122,7 @@
     <Compile Include="Converters\BoolToButtonTextConverter.cs" />
     <Compile Include="Converters\StatusToColorConverter.cs" />
     <Compile Include="Converters\BoolToStatusConverter.cs" />
-    <Compile Include="Db.cs" />
+    <Compile Include="TimeSheetService.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
