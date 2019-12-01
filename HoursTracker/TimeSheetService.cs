@@ -129,12 +129,13 @@ namespace HoursTracker
         {
             var timeSheets = new ObservableCollection<TimeSheet>();
             var (startOfWeek, endOfWeek) = GetCurrentWeek();
-            var sql = $"select * from {Table} where TimeOfAction between '{startOfWeek}' and '{endOfWeek}'";
-            
+           
             var categories = await GetDistinctCategories();
             foreach (var category in categories)
             {
-                sql += $" and Category = '{category}'";
+                var sql = $"select * from {Table} where TimeOfAction between '{startOfWeek}' and '{endOfWeek}' and Category = '{category}'";
+
+                //sql += $" and Category = '{category}'";
                 var dt = await GetList(sql);
                 var ts = new TimeSheet
                 {
@@ -190,16 +191,23 @@ namespace HoursTracker
         private static (string startOfWeek, string endOfWeek) GetCurrentWeek()
         {
             var result = (start: "", end: "");
-
-            var startOfWeek = DateTime.Today;
-            var delta = DayOfWeek.Monday - startOfWeek.DayOfWeek;
-            startOfWeek = startOfWeek.AddDays(delta);
-            var endOfWeek = startOfWeek.AddDays(7);
+            //https://stackoverflow.com/a/38064/6584597
+            var startOfWeek = DateTime.Today.StartOfWeek(DayOfWeek.Monday);
+            var endOfWeek = startOfWeek.AddDays(6).AddHours(23).AddMinutes(59).AddSeconds(59);
 
             result.start = DateTimeSQLite(startOfWeek);
             result.end = DateTimeSQLite(endOfWeek);
 
             return result;
+        }
+      
+    }
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
+            return dt.AddDays(-1 * diff).Date;
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace HoursTracker.ViewModels
 {
-    public class TimeSheet : NotificationBase, INotifyPropertyChanged
+    public class TimeSheet
     {
         public bool ClockedIn { get; set; }
 
