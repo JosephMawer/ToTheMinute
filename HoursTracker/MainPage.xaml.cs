@@ -14,40 +14,22 @@ namespace HoursTracker
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private readonly ApplicationDataContainer _localSettings;
-        private bool _clockedIn;
         private List<TimeSheet> TimeSheets;
         private TimeSheetViewModel _timesheetVM = new TimeSheetViewModel();
+       
+        
         public MainPage()
         {
             this.InitializeComponent();
             TimeSheets = _timesheetVM.GetTimeSheets().Result;
-            
-            
-
-            
-            _localSettings = ApplicationData.Current.LocalSettings;
-            _clockedIn = _localSettings.Values["ClockedIn"] as bool? ?? false;
-            // updates text on button
-            //ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
         }
 
         private async void ClockInClicked(object sender, RoutedEventArgs e)
         {
-            var action = _clockedIn ? Db.ClockAction.ClockOut : Db.ClockAction.ClockIn;
-            await Db.AddData(action);
-            UpdateSettings();
+            //var action = _clockedIn ? Db.ClockAction.ClockOut : Db.ClockAction.ClockIn;
+            //await Db.AddData(action);
         }
 
-        // manages state, i.e. clocked-in or clocked-out
-        private void UpdateSettings()
-        {
-            // updates internal state
-            _clockedIn = !_clockedIn;
-            _localSettings.Values["ClockedIn"] = _clockedIn;
-
-            // updates text on button
-            //ClockActionButton.Content = _clockedIn ? "Clock Out" : "Clock In";
-        }
+      
     }
 }
