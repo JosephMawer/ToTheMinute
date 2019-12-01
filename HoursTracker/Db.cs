@@ -78,7 +78,6 @@ namespace HoursTracker
 
                 await _command.ExecuteReaderAsync();
             }
-           
         }
 
         // returns a list of distinct categories from database
@@ -125,9 +124,9 @@ namespace HoursTracker
         }
 
         // returns a list of time sheet objects
-        public static async Task<List<TimeSheet>> GetTimeSheets()
+        public static async Task<ObservableCollection<TimeSheet>> GetTimeSheets()
         {
-            var timeSheets = new List<TimeSheet>();
+            var timeSheets = new ObservableCollection<TimeSheet>();
             var (startOfWeek, endOfWeek) = GetCurrentWeek();
             var sql = $"select * from {Table} where TimeOfAction between '{startOfWeek}' and '{endOfWeek}'";
             

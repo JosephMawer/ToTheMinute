@@ -32,7 +32,7 @@
         </StackPanel>
 
 
-        <ListBox Grid.Row="1" ItemsSource="{x:Bind TimeSheets}">
+        <ListBox x:Name="Joe" Grid.Row="1" ItemsSource="{x:Bind TimeSheetViewModel.TimeSheets, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate x:DataType="viewModel:TimeSheet">
                     <Grid>
@@ -52,7 +52,7 @@
                             </TextBlock>
                             <Button Content="{x:Bind ClockedIn, Converter={StaticResource ClockConverter}, Mode=TwoWay}"
                                 Width="100" Height="35" Margin="0 5 5 5"
-                                Click="ClockInClicked"></Button>
+                                Command="{x:Bind DummyCommand}"/>
                         </StackPanel>
                         <Grid Grid.Column="1" Margin="0 5">
                             <Grid.RowDefinitions>
