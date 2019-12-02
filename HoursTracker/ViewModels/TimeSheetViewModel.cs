@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -53,7 +54,24 @@ namespace HoursTracker.ViewModels
 
     public class TimeSheetViewModel : NotificationBase
     {
+        public string CurrentDate { get; set; }
         public TimeSheet TimeSheet { get; set; }
+        private string _weekday;
+
+        public string Weekday
+        {
+            get => _weekday;
+            set
+            {
+                _weekday = value;
+                SetProperty(Weekday, value, () => Weekday = value);
+
+                RaisePropertyChanged(nameof(Weekday));
+            }
+        }
+        public string Date { get; set; }
+        public string Time { get; set; }
+        private readonly Timer Clock;
 
         private ObservableCollection<TimeSheet> _timeSheets;
         public ObservableCollection<TimeSheet> TimeSheets// { get; set; }
@@ -68,9 +86,30 @@ namespace HoursTracker.ViewModels
             }
         }
 
+
+        public ICommand AddCategoryCommand { get; set; }
+
         public TimeSheetViewModel()
         {
+            //Clock = new Timer(ClockEvent, null, 100, 100);
+            var time = DateTime.Now;
+            Weekday = time.DayOfWeek.ToString();
+            Date = time.ToString("MMMM dd, yyyy");
+            Time = time.ToString("h:mm tt");
+            AddCategoryCommand = new RelayCommand(() =>
+            {
+                TimeSheetService.AddData(TimeSheetService.ClockAction.ClockOut, "New Category").Wait();
+                UpdateTimeSheet();
+            });
             UpdateTimeSheet();
+        }
+
+        private void ClockEvent(object state)
+        {
+            var time = DateTime.Now;
+            Weekday = time.DayOfWeek.ToString();
+            Date = time.ToString("MM dd, yyyy");
+            Time = time.ToString("h:mm tt");
         }
 
         public void UpdateTimeSheet()

@@ -102,6 +102,8 @@ namespace HoursTracker
             }
         }
 
+      
+
         public static async Task<List<POCO>> GetList(string sql)
         {
             using (var cmd = new SqliteCommand(sql, _connection))
@@ -203,7 +205,8 @@ namespace HoursTracker
 
             return result;
         }
-      
+
+        
     }
    
 }
