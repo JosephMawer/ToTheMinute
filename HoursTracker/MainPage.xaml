@@ -17,6 +17,7 @@
         <converters:BoolToStatusConverter x:Key="StatusConverter"/>
         <converters:StatusToColorConverter x:Key="ColorConverter"/>
         <converters:BoolToButtonTextConverter x:Key="ClockConverter"/>
+        <converters:StringFormatConverter x:Key="StringFormatConverter"/>
     </Page.Resources>
 
     <Grid>
@@ -81,7 +82,9 @@
                             <TextBlock Text="{x:Bind Week[5].Day}" Grid.Row="0" Grid.Column="5" Margin="5,0"/>
                             <TextBlock Text="{x:Bind Week[5].TotalHours}" Grid.Row="1" Grid.Column="5" Margin="5,0"/>
                             <TextBlock Text="{x:Bind Week[6].Day}" Grid.Row="0" Grid.Column="6" Margin="5,0"/>
-                            <TextBlock Text="{x:Bind Week[6].TotalHours}" Grid.Row="1" Grid.Column="6" Margin="5,0"/>
+                            <TextBlock Text="{x:Bind Week[6].TotalHours, 
+                         Converter={StaticResource StringFormatConverter}, 
+                         ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="6" Margin="5,0"/>
                         </Grid>
                     </Grid>
                 </DataTemplate>

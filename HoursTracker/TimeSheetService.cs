@@ -135,7 +135,6 @@ namespace HoursTracker
             {
                 var sql = $"select * from {Table} where TimeOfAction between '{startOfWeek}' and '{endOfWeek}' and Category = '{category}'";
 
-                //sql += $" and Category = '{category}'";
                 var dt = await GetList(sql);
                 var ts = new TimeSheet
                 {
@@ -143,6 +142,7 @@ namespace HoursTracker
                     Week = GetWeeklyData(dt),
                     ClockedIn = await IsUserClockedIn(category)
                 };
+
                 timeSheets.Add(ts);
             }
 
@@ -164,7 +164,7 @@ namespace HoursTracker
         private static List<Week> GetWeeklyData(List<POCO> table)
         {
             var weeklyData = new List<Week>();
-            var (startOfWeek, endOfWeek) = GetCurrentWeek();
+            var (startOfWeek, _) = GetCurrentWeek();
             var startDate = DateTime.Parse(startOfWeek);
             for (var i = 0; i < 7; i++)
             {
@@ -180,7 +180,10 @@ namespace HoursTracker
                 }
 
                 var week = new Week();
-                week.Day = ((DayOfWeek) i).ToString().Substring(0,3);
+                week.Day = (i < 6)  // hack, since enum starts on sunday, but I am starting on mon as first day of the week
+                    ? ((DayOfWeek) i + 1).ToString().Substring(0, 3)
+                    : ((DayOfWeek) 0).ToString().Substring(0, 3);
+
                 week.TotalHours = (float)runningTotal;
                 weeklyData.Add(week);
             }
@@ -202,12 +205,5 @@ namespace HoursTracker
         }
       
     }
-    public static class DateTimeExtensions
-    {
-        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
-        {
-            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
-            return dt.AddDays(-1 * diff).Date;
-        }
-    }
+   
 }

@@ -26,7 +26,7 @@ namespace HoursTracker.ViewModels
             {
                 var action = ClockedIn ? TimeSheetService.ClockAction.ClockOut : TimeSheetService.ClockAction.ClockIn;
                 TimeSheetService.AddData(action, Category).ConfigureAwait(false);
-                OnClockEvent(Category);
+                 OnClockEvent(Category);
             });
         }
 
