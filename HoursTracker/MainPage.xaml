@@ -70,21 +70,26 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{x:Bind Week[0].Day}" Grid.Row="0" Grid.Column="0" Margin="5,0"/>
-                            <TextBlock Text="{x:Bind Week[0].TotalHours}" Grid.Row="1" Grid.Column="0" Margin="5,0"/>
+                            <TextBlock Text="{x:Bind Week[0].TotalHours, Converter={StaticResource StringFormatConverter}, 
+                                              ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="0" Margin="5,0"/>
                             <TextBlock Text="{x:Bind Week[1].Day}" Grid.Row="0" Grid.Column="1" Margin="5,0"/>
-                            <TextBlock Text="{x:Bind Week[1].TotalHours}" Grid.Row="1" Grid.Column="1" Margin="5,0"/>
+                            <TextBlock Text="{x:Bind Week[1].TotalHours, Converter={StaticResource StringFormatConverter}, 
+                                              ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="1" Margin="5,0"/>
                             <TextBlock Text="{x:Bind Week[2].Day}" Grid.Row="0" Grid.Column="2" Margin="5,0"/>
-                            <TextBlock Text="{x:Bind Week[2].TotalHours}" Grid.Row="1" Grid.Column="2" Margin="5,0"/>
+                            <TextBlock Text="{x:Bind Week[2].TotalHours, Converter={StaticResource StringFormatConverter}, 
+                                              ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="2" Margin="5,0"/>
                             <TextBlock Text="{x:Bind Week[3].Day}" Grid.Row="0" Grid.Column="3" Margin="5,0"/>
-                            <TextBlock Text="{x:Bind Week[3].TotalHours}" Grid.Row="1" Grid.Column="3" Margin="5,0"/>
+                            <TextBlock Text="{x:Bind Week[3].TotalHours,  Converter={StaticResource StringFormatConverter}, 
+                                              ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="3" Margin="5,0"/>
                             <TextBlock Text="{x:Bind Week[4].Day}" Grid.Row="0" Grid.Column="4" Margin="5,0"/>
-                            <TextBlock Text="{x:Bind Week[4].TotalHours}" Grid.Row="1" Grid.Column="4" Margin="5,0"/>
+                            <TextBlock Text="{x:Bind Week[4].TotalHours, Converter={StaticResource StringFormatConverter}, 
+                                              ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="4" Margin="5,0"/>
                             <TextBlock Text="{x:Bind Week[5].Day}" Grid.Row="0" Grid.Column="5" Margin="5,0"/>
-                            <TextBlock Text="{x:Bind Week[5].TotalHours}" Grid.Row="1" Grid.Column="5" Margin="5,0"/>
+                            <TextBlock Text="{x:Bind Week[5].TotalHours, Converter={StaticResource StringFormatConverter}, 
+                                              ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="5" Margin="5,0"/>
                             <TextBlock Text="{x:Bind Week[6].Day}" Grid.Row="0" Grid.Column="6" Margin="5,0"/>
-                            <TextBlock Text="{x:Bind Week[6].TotalHours, 
-                         Converter={StaticResource StringFormatConverter}, 
-                         ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="6" Margin="5,0"/>
+                            <TextBlock Text="{x:Bind Week[6].TotalHours, Converter={StaticResource StringFormatConverter}, 
+                                              ConverterParameter='0.00'}" Grid.Row="1" Grid.Column="6" Margin="5,0"/>
                         </Grid>
                     </Grid>
                 </DataTemplate>
