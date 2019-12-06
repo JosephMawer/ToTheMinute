@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace HoursTracker.ViewModels
 {
@@ -70,7 +72,16 @@ namespace HoursTracker.ViewModels
             }
         }
         public string Date { get; set; }
-        public string Time { get; set; }
+        private string _time;
+        public string Time
+        {
+            get => _time;
+            set
+            {
+                _time = value;
+                RaisePropertyChanged(nameof(Time));
+            }
+        }
         private readonly Timer Clock;
 
         private ObservableCollection<TimeSheet> _timeSheets;
@@ -91,7 +102,7 @@ namespace HoursTracker.ViewModels
 
         public TimeSheetViewModel()
         {
-            //Clock = new Timer(ClockEvent, null, 100, 100);
+            Clock = new Timer(ClockEvent, null,1000,1000);
             var time = DateTime.Now;
             Weekday = time.DayOfWeek.ToString();
             Date = time.ToString("MMMM dd, yyyy");
@@ -104,12 +115,26 @@ namespace HoursTracker.ViewModels
             UpdateTimeSheet();
         }
 
-        private void ClockEvent(object state)
+        // this event handler is executed on a different thread
+        private async void ClockEvent(object state)
         {
-            var time = DateTime.Now;
-            Weekday = time.DayOfWeek.ToString();
-            Date = time.ToString("MM dd, yyyy");
-            Time = time.ToString("h:mm tt");
+            //await Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            //{
+            //    var time = DateTime.Now;
+            //    //if (time.Minute != this.Time)
+            //    Weekday = time.DayOfWeek.ToString();
+            //    Date = time.ToString("MM dd, yyyy");
+            //    Time = time.ToString("h:mm tt");
+            //});
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                var time = DateTime.Now;
+                //if (time.Minute != this.Time)
+                Weekday = time.DayOfWeek.ToString();
+                Date = time.ToString("MM dd, yyyy");
+                Time = time.ToString("h:mm tt");
+            });
+
         }
 
         public void UpdateTimeSheet()

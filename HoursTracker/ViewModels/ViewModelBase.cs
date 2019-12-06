@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace HoursTracker.ViewModels
 {
@@ -30,12 +32,13 @@ namespace HoursTracker.ViewModels
             return true;
         }
 
-        protected void RaisePropertyChanged(string property)
+        protected async void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
+
         }
     }
 
